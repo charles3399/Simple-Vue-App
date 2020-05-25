@@ -12,7 +12,7 @@
         <div class="card my-5">
           <div class="card-header"><h4>Todo app using <i class="fab fa-vuejs"></i>ue</h4></div>
           <div class="card-body">
-            <input class="form-control" type='text' v-model="newList">
+            <input class="form-control" type='text' v-model="newList" v-on:keyup.enter="addList">
             <button class="btn btn-outline-primary my-2" @click='addList'>
               <i class="fa fa-plus-circle" aria-hidden="true"> Add</i>
             </button>
