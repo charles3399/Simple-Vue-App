@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <!--Animate.css-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"/>
+
     <title>Vue App</title>
 </head>
 <body>
@@ -20,7 +23,7 @@
         </div>
 
         <ul class="list-group">
-          <li class="list-group-item d-flex justify-content-between" v-for="list, remove in lists">{{ list }}<button class="btn" @click="removeList(remove)">
+          <li class="list-group-item d-flex justify-content-between animate__animated animate__fadeInDown" v-for="list, remove in lists">{{ list }}<button class="btn" @click="removeList(remove)">
               <i class="fa fa-check-circle btn btn-success" aria-hidden="true"></i>
             </button></li>
         </ul>
