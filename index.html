@@ -3,49 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
     <!--Animate.css-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css">
+    
 
-    <title>Vue App</title>
+    <title>Todo App | Vue.js</title>
 </head>
 <body>
   
     <div id="app" class="container col-lg-6">
-        <div class="card shadow my-5">
-          <div class="card-header"><h4>Todo app using <i class="fab fa-vuejs"></i>ue</h4></div>
+        <div class="card text-center shadow my-5">
+          <div class="card-header"><h4>List your to-do for today!</div>
           <div class="card-body">
             <input class="form-control" type='text'
             v-model="addTodo"
             v-on:keyup.enter="addList"
             >
 
-            <button class="btn btn-outline-primary my-2"
+            <button class="btn btn-secondary my-2"
             @click='addList' :disabled='addTodo.length === 0'>
-              <i class="fa fa-plus-circle" aria-hidden="true"> Add</i>
+              <i class="fa fa-plus-circle" aria-hidden="true"><strong> Add</strong></i>
             </button>
           </div>
         </div>
 
         <ul class="list-group">
+            <li class="shadow mb-4 list-group-item animate__animated animate__fadeInDown"
+            v-for="list, remove in lists">
 
-          <li class="shadow mb-5 list-group-item animate__animated animate__fadeInDown"
-          v-for="list, remove in lists">
+              <span v-if="list.isDone"><s>{{list.text}}</s></span>
+              <span v-else>{{list.text}}</span>
 
-            <span v-if="list.isDone"><s>{{list.text}}</s></span>
-            <span v-else>{{list.text}}</span>
+              <button type="button" class="close float-right" aria-label="Close" @click="removeList(remove)">
+                <span aria-hidden="true">&times;</span>
+              </button>
 
-            <button class="btn float-right" @click="removeList(remove)">
-              <i class="fa fa-trash btn btn-danger" aria-hidden="true"> Delete</i> 
-            </button>
-            
-            <button class="btn float-right" @click="toggleDone(list)">
-              <i v-if="list.isDone" class="fa fa-undo btn btn-warning" aria-hidden="true"> Undo</i> 
-              <i  v-else class="fa fa-check-circle btn btn-success" aria-hidden="true"> Mark as done</i> 
-            </button>
+              <button v-if="list.isDone" class="btn undoButton float-right" @click="toggleDone(list)">
+                <i class="fas fa-undo" aria-hidden="true"><strong> Undo</strong></i> 
+              </button>
 
-          </li>
+              <button v-else class="btn doneButton float-right" @click="toggleDone(list)">
+                <i class="far fa-check-circle" aria-hidden="true"><strong> Mark as done</strong></i> 
+              </button>
+
+            </li>
 
         </ul>
 
