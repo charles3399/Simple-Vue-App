@@ -11,26 +11,47 @@
     <title>Vue App</title>
 </head>
 <body>
-    <div id="app" class="container col-lg-4">
-        <div class="card my-5">
+  
+    <div id="app" class="container col-lg-6">
+        <div class="card shadow my-5">
           <div class="card-header"><h4>Todo app using <i class="fab fa-vuejs"></i>ue</h4></div>
           <div class="card-body">
-            <input class="form-control" type='text' v-model="newList" v-on:keyup.enter="addList">
-            <button class="btn btn-outline-primary my-2" @click='addList'>
+            <input class="form-control" type='text'
+            v-model="addTodo"
+            v-on:keyup.enter="addList"
+            >
+
+            <button class="btn btn-outline-primary my-2"
+            @click='addList' :disabled='addTodo.length === 0'>
               <i class="fa fa-plus-circle" aria-hidden="true"> Add</i>
             </button>
           </div>
         </div>
 
         <ul class="list-group">
-          <li class="list-group-item d-flex justify-content-between animate__animated animate__fadeInDown" v-for="list, remove in lists">{{ list }}<button class="btn" @click="removeList(remove)">
-              <i class="fa fa-check-circle btn btn-success" aria-hidden="true"></i>
-            </button></li>
+
+          <li class="shadow mb-5 list-group-item animate__animated animate__fadeInDown"
+          v-for="list, remove in lists">
+
+            <span v-if="list.isDone"><s>{{list.text}}</s></span>
+            <span v-else>{{list.text}}</span>
+
+            <button class="btn float-right" @click="removeList(remove)">
+              <i class="fa fa-trash btn btn-danger" aria-hidden="true"> Delete</i> 
+            </button>
+            
+            <button class="btn float-right" @click="toggleDone(list)">
+              <i v-if="list.isDone" class="fa fa-undo btn btn-warning" aria-hidden="true"> Undo</i> 
+              <i  v-else class="fa fa-check-circle btn btn-success" aria-hidden="true"> Mark as done</i> 
+            </button>
+
+          </li>
+
         </ul>
 
     </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-  <script src="app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>
