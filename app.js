@@ -7,7 +7,7 @@ Vue.component('todolists', {
         
           <input class="form-control" type='text' v-model="addTodo" v-on:keyup.enter="addList">
 
-          <button class="btn btn-secondary my-2" @click='addList' :disabled='addTodo.length === 0'>
+          <button class="btn btn-success btn-lg my-2" @click='addList' :disabled="isDisabled">
             <i class="fa fa-plus-circle" aria-hidden="true"><strong> Add</strong></i>
           </button>
 
@@ -15,21 +15,20 @@ Vue.component('todolists', {
       </div>
 
       <ul class="list-group">
-          <li class="shadow mb-4 list-group-item animate__animated animate__fadeInDown"
-          v-for="list, remove in lists">
+          <li class="shadow mb-4 list-group-item animate__animated animate__fadeInDown" v-for="list, remove in lists">
 
             <span v-if="list.isDone"><s>{{list.text}}</s></span>
             <span v-else>{{list.text}}</span>
 
-            <button type="button" class="close float-right" aria-label="Close" @click="removeList(remove)">
+            <button class="close float-right" aria-label="Close" @click="removeList(remove)">
               <span aria-hidden="true">&times;</span>
             </button>
 
-            <button v-if="list.isDone" class="btn undoButton float-right" @click="toggleDone(list)">
+            <button v-if="list.isDone" class="btn btn-sm undoButton float-right" @click="toggleDone(list)">
               <i class="fas fa-undo" aria-hidden="true"><strong> Undo</strong></i> 
             </button>
 
-            <button v-else class="btn doneButton float-right" @click="toggleDone(list)">
+            <button v-else class="btn btn-sm doneButton float-right" @click="toggleDone(list)">
               <i class="far fa-check-circle" aria-hidden="true"><strong> Mark as done</strong></i> 
             </button>
 
@@ -42,12 +41,12 @@ Vue.component('todolists', {
   data() {
     return {
       addTodo: '',
-    lists: [
-      {text: "Clean the room", isDone: false},
-      {text: "Cook food", isDone: false},
-      {text: "Study Vue", isDone: true},
-      {text: "Sleep", isDone: true},
-    ] 
+      lists: [
+        {text: "Clean the room", isDone: false},
+        {text: "Cook food", isDone: false},
+        {text: "Study Vue", isDone: true},
+        {text: "Sleep", isDone: true}
+      ] 
     }
   },
 
@@ -63,6 +62,12 @@ Vue.component('todolists', {
 
     toggleDone(list) {
       list.isDone = !list.isDone;
+    }
+  },
+
+  computed: {
+    isDisabled() {
+      return this.addTodo.length === 0;
     }
   }
 
