@@ -60,7 +60,7 @@ Vue.component('todolists', {
         </nav>
       </div>
 
-      <div class="container col-lg-6">
+      <div class="container-fluid col-lg-6">
         <div class="card bg-dark text-center shadow my-5">
           <div class="card-header"><h4>List your to-do for tonight!</h4></div>
           <div class="card-body">
