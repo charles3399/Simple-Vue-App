@@ -6,7 +6,7 @@ Vue.component('todolists', {
           <h2>Dark mode off</h2>
           <label class="switch">
             <input type="checkbox" @click="toggleDark">
-            <span class="slider round"></span>
+            <span class="slider"></span>
           </label>
         </nav>
       </div>
@@ -80,7 +80,7 @@ Vue.component('todolists', {
               <span v-if="list.isDone" class="strikeDark">{{list.text}}</span>
               <span v-else>{{list.text}}</span>
 
-              <button class="close float-right" aria-label="Close" @click="removeList(remove)">
+              <button class="close cDark float-right" aria-label="Close" @click="removeList(remove)">
                 <span aria-hidden="true">&times;</span>
               </button>
 
@@ -106,7 +106,6 @@ Vue.component('todolists', {
       lists: [
         {text: "Clean the room", isDone: false},
         {text: "Cook food", isDone: false},
-        {text: "Study Vue", isDone: true},
         {text: "Sleep", isDone: true}
       ] 
     }

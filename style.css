@@ -19,6 +19,11 @@ strong {
     100% {width: 100;}
 }
 
+button.close.cDark {
+    color: #ffff;
+    opacity: 1;
+}
+
 .strike, .strikeDark{
     position: relative;
 }
