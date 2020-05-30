@@ -1,46 +1,108 @@
 Vue.component('todolists', {
   template: `
-    <div>
-      <div class="card text-center shadow my-5">
-        <div class="card-header"><h4>List your to-do for today!</h4></div>
-        <div class="card-body">
-        
-          <input class="form-control" type='text' v-model="addTodo" v-on:keyup.enter="addList">
-
-          <button class="btn btn-success btn-lg my-2" @click='addList' :disabled="isDisabled">
-            <i class="fa fa-plus-circle" aria-hidden="true"><strong> Add</strong></i>
-          </button>
-
-        </div>
+    <div v-if="mode === false" class="app">
+      <div>
+        <nav class="navbar navbar-expand navbar-lg">
+          <h2>Dark mode off</h2>
+          <label class="switch">
+            <input type="checkbox" @click="toggleDark">
+            <span class="slider round"></span>
+          </label>
+        </nav>
       </div>
 
-      <ul class="list-group">
-          <li class="shadow mb-4 list-group-item animate__animated animate__fadeInDown" v-for="list, remove in lists">
+      <div class="container col-lg-6">
+        <div class="card text-center shadow my-5">
+          <div class="card-header"><h4>List your to-do for today!</h4></div>
+          <div class="card-body">
+      
+            <input class="form-control" type='text' v-model="addTodo" v-on:keyup.enter="addList">
 
-            <span v-if="list.isDone"><s>{{list.text}}</s></span>
-            <span v-else>{{list.text}}</span>
-
-            <button class="close float-right" aria-label="Close" @click="removeList(remove)">
-              <span aria-hidden="true">&times;</span>
+            <button class="btn btn-success btn-lg my-2" @click='addList' :disabled="isDisabled">
+              <i class="fa fa-plus-circle" aria-hidden="true"><strong> Add</strong></i>
             </button>
 
-            <button v-if="list.isDone" class="btn btn-sm undoButton float-right" @click="toggleDone(list)">
-              <i class="fas fa-undo" aria-hidden="true"><strong> Undo</strong></i> 
+          </div>
+        </div>
+
+        <ul class="list-group">
+            <li class="shadow mb-4 list-group-item animate__animated animate__fadeInDown" v-for="list, remove in lists">
+
+              <span v-if="list.isDone"><s>{{list.text}}</s></span>
+              <span v-else>{{list.text}}</span>
+
+              <button class="close float-right" aria-label="Close" @click="removeList(remove)">
+                <span aria-hidden="true">&times;</span>
+              </button>
+
+              <button v-if="list.isDone" class="btn btn-sm undoButton float-right" @click="toggleDone(list)">
+                <i class="fas fa-undo" aria-hidden="true"><strong> Undo</strong></i> 
+              </button>
+
+              <button v-else class="btn btn-sm doneButton float-right" @click="toggleDone(list)">
+                <i class="far fa-check-circle" aria-hidden="true"><strong> Mark as done</strong></i> 
+              </button>
+
+            </li>
+
+        </ul>
+      </div>
+    </div>
+
+    <div v-else class="dark">
+      <div>
+        <nav class="navbar navbar-expand navbar-lg">
+          <h2>Dark mode on</h2>
+          <label class="switch">
+            <input type="checkbox" @click="toggleDark">
+            <span class="slider round"></span>
+          </label>
+        </nav>
+      </div>
+
+      <div class="container col-lg-6">
+        <div class="card bg-dark text-center shadow my-5">
+          <div class="card-header"><h4>List your to-do for tonight!</h4></div>
+          <div class="card-body">
+      
+            <input class="form-control" type='text' v-model="addTodo" v-on:keyup.enter="addList">
+
+            <button class="btn btn-success btn-lg my-2" @click='addList' :disabled="isDisabled">
+              <i class="fa fa-plus-circle" aria-hidden="true"><strong> Add</strong></i>
             </button>
 
-            <button v-else class="btn btn-sm doneButton float-right" @click="toggleDone(list)">
-              <i class="far fa-check-circle" aria-hidden="true"><strong> Mark as done</strong></i> 
-            </button>
+          </div>
+        </div>
 
-          </li>
+        <ul class="list-group">
+            <li class="shadow bg-dark mb-4 list-group-item animate__animated animate__fadeInDown" v-for="list, remove in lists">
 
-      </ul>
-    </div>  
+              <span v-if="list.isDone"><s>{{list.text}}</s></span>
+              <span v-else>{{list.text}}</span>
+
+              <button class="close float-right" aria-label="Close" @click="removeList(remove)">
+                <span aria-hidden="true">&times;</span>
+              </button>
+
+              <button v-if="list.isDone" class="btn btn-sm undoButton float-right" @click="toggleDone(list)">
+                <i class="fas fa-undo" aria-hidden="true"><strong> Undo</strong></i> 
+              </button>
+
+              <button v-else class="btn btn-sm doneButton float-right" @click="toggleDone(list)">
+                <i class="far fa-check-circle" aria-hidden="true"><strong> Mark as done</strong></i> 
+              </button>
+
+            </li>
+
+        </ul>
+      </div>
+    </div>
   `,
 
   data() {
     return {
       addTodo: '',
+      mode: false,
       lists: [
         {text: "Clean the room", isDone: false},
         {text: "Cook food", isDone: false},
@@ -62,6 +124,14 @@ Vue.component('todolists', {
 
     toggleDone(list) {
       list.isDone = !list.isDone;
+    },
+
+    toggleDark() {
+      if (this.mode === true) {
+        this.mode = false
+      } else {
+        this.mode = true
+      }
     }
   },
 
