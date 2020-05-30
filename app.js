@@ -28,7 +28,7 @@ Vue.component('todolists', {
         <ul class="list-group">
             <li class="shadow mb-4 list-group-item animate__animated animate__fadeInDown" v-for="list, remove in lists">
 
-              <span v-if="list.isDone"><s>{{list.text}}</s></span>
+              <span v-if="list.isDone" class="strike">{{list.text}}</span>
               <span v-else>{{list.text}}</span>
 
               <button class="close float-right" aria-label="Close" @click="removeList(remove)">
@@ -77,7 +77,7 @@ Vue.component('todolists', {
         <ul class="list-group">
             <li class="shadow bg-dark mb-4 list-group-item animate__animated animate__fadeInDown" v-for="list, remove in lists">
 
-              <span v-if="list.isDone"><s>{{list.text}}</s></span>
+              <span v-if="list.isDone" class="strikeDark">{{list.text}}</span>
               <span v-else>{{list.text}}</span>
 
               <button class="close float-right" aria-label="Close" @click="removeList(remove)">
