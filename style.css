@@ -147,10 +147,21 @@ input:checked + .slider:before {
     min-height: 100vh;
 }
 
+li.bg-dark, .bg-dark {
+    transition: background 0.3s ease-in-out;
+}
+
 .dark {
     background-color: #1B2431;
     color: whitesmoke;
     transition: background 0.3s ease-in-out;
     width: 100vw;
     min-height: 100vh;
+}
+
+@media (max-width: 900px) {
+    nav.navbar {
+        display: flex;
+        justify-content: center;
+    }
 }
