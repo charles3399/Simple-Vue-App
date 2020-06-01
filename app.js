@@ -1,4 +1,4 @@
-Vue.component('todolists', {
+Vue.component("todolists", {
   template: `
     <div v-if="mode === false" class="app">
       <div>
@@ -101,20 +101,20 @@ Vue.component('todolists', {
 
   data() {
     return {
-      addTodo: '',
+      addTodo: "",
       mode: false,
       lists: [
-        {text: "Clean the room", isDone: false},
-        {text: "Cook food", isDone: false},
-        {text: "Sleep", isDone: true}
-      ] 
-    }
+        { text: "Clean the room", isDone: false },
+        { text: "Cook food", isDone: false },
+        { text: "Sleep", isDone: true },
+      ],
+    };
   },
 
   methods: {
     addList() {
-      this.lists.push({text: this.addTodo, isDone: false});
-      this.addTodo = '';
+      this.lists.push({ text: this.addTodo, isDone: false });
+      this.addTodo = "";
     },
 
     removeList(remove) {
@@ -127,19 +127,18 @@ Vue.component('todolists', {
 
     toggleDark() {
       if (this.mode === true) {
-        this.mode = false
+        this.mode = false;
       } else {
-        this.mode = true
+        this.mode = true;
       }
-    }
+    },
   },
 
   computed: {
     isDisabled() {
       return this.addTodo.length === 0;
-    }
-  }
-
+    },
+  },
 });
 
 new Vue({
