@@ -3,7 +3,7 @@ Vue.component('todolists', {
     <div v-if="mode === false" class="app">
       <div>
         <nav class="navbar navbar-expand navbar-lg">
-          <h2>Dark mode off</h2>
+          <h4>Dark mode off</h4>
           <label class="switch">
             <input type="checkbox" @click="toggleDark">
             <span class="slider"></span>
@@ -52,7 +52,7 @@ Vue.component('todolists', {
     <div v-else class="dark">
       <div>
         <nav class="navbar navbar-expand navbar-lg">
-          <h2>Dark mode on</h2>
+          <h4>Dark mode on</h4>
           <label class="switch">
             <input type="checkbox" @click="toggleDark">
             <span class="slider round"></span>
