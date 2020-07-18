@@ -113,7 +113,8 @@ Vue.component("todolists", {
 
   methods: {
     addList() {
-      if (this.addTodo === '') {
+      inputLen = this.addTodo.trim().length;
+      if (inputLen == 0) {
         alert('Cannot be empty, please enter a valid todo/task!');
       }
       else {
