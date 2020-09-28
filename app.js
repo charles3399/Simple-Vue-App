@@ -123,6 +123,8 @@ Vue.component("todolists", {
   },
 });
 
+Vue.config.devtools = false //disable when debugging
+
 new Vue({
   el: '#app'
 });
