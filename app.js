@@ -94,8 +94,8 @@ Vue.component("todolists", {
       inputLen = this.addTodo.trim().length;
       if(inputLen == 0) {
         alert('Your input is empty, make sure to add a valid todo/task!')
+        this.addTodo = ""
       }
-      this.addTodo = ""
     },
 
     removeList(remove) {
