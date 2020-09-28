@@ -1,9 +1,9 @@
 Vue.component("todolists", {
   template: `
-    <div v-if="mode === false" class="app">
+    <div :class="bodyTheme">
       <div>
-        <nav class="navbar navbar-expand navbar-lg">
-          <h4>Dark mode off</h4>
+        <nav class="navbar navbar-expand navbar-lg" :class="bgChange">
+          <h4>{{darkModeText}}</h4>
           <label class="switch">
             <input type="checkbox" @click="toggleDark">
             <span class="slider"></span>
@@ -12,89 +12,43 @@ Vue.component("todolists", {
       </div>
 
       <div class="container-fluid col-lg-6">
-        <div class="card text-center shadow my-5">
-          <div class="card-header"><h4>List your to-do for today!</h4></div>
+        <div class="card text-center shadow my-5" :class="bgChange">
+
+          <div class="card-header">
+            <h4>{{cardTitle}}</h4>
+          </div>
+
           <div class="card-body">
-      
-            <input class="form-control" type='text' v-model="addTodo" v-on:keyup.enter="addList">
+            <input class="form-control" type='text' v-model="addTodo" v-on:keyup.enter="addList" v-on:keyup.space="spaceBarValidate">
 
             <button class="btn btn-success btn-lg my-2" @click='addList' :disabled="isDisabled">
               <i class="fa fa-plus-circle" aria-hidden="true"><strong> Add</strong></i>
             </button>
-
           </div>
+
         </div>
 
         <ul class="list-group">
-            <li class="shadow mb-4 list-group-item animate__animated animate__fadeInDown" v-for="list, remove in lists">
+          <li :class="bgChange" class="shadow mb-4 list-group-item animate__animated animate__fadeInDown" v-for="list, remove in lists">
 
-              <span v-if="list.isDone" class="strike">{{list.text}}</span>
-              <span v-else>{{list.text}}</span>
+            <span v-if="list.isDone" :class="strikeTheme">{{list.text}}</span>
+            <span v-else>{{list.text}}</span>
 
-              <button class="close float-right" aria-label="Close" @click="removeList(remove)">
-                <span aria-hidden="true">&times;</span>
-              </button>
-
-              <button v-if="list.isDone" class="btn btn-sm undoButton float-right" @click="toggleDone(list)">
-                <i class="fas fa-undo" aria-hidden="true"><strong> Undo</strong></i> 
-              </button>
-
-              <button v-else class="btn btn-sm doneButton float-right" @click="toggleDone(list)">
-                <i class="far fa-check-circle" aria-hidden="true"><strong> Mark as done</strong></i> 
-              </button>
-
-            </li>
-
-        </ul>
-      </div>
-    </div>
-
-    <div v-else class="dark">
-      <div>
-        <nav class="navbar navbar-expand navbar-lg">
-          <h4>Dark mode on</h4>
-          <label class="switch">
-            <input type="checkbox" @click="toggleDark">
-            <span class="slider round"></span>
-          </label>
-        </nav>
-      </div>
-
-      <div class="container-fluid col-lg-6">
-        <div class="card bg-dark text-center shadow my-5">
-          <div class="card-header"><h4>List your to-do for tonight!</h4></div>
-          <div class="card-body">
-      
-            <input class="form-control" type='text' v-model="addTodo" v-on:keyup.enter="addList">
-
-            <button class="btn btn-success btn-lg my-2" @click='addList' :disabled="isDisabled">
-              <i class="fa fa-plus-circle" aria-hidden="true"><strong> Add</strong></i>
+            <button class="close float-right" aria-label="Close" @click="removeList(remove)">
+              <span aria-hidden="true">&times;</span>
             </button>
 
-          </div>
-        </div>
+            <button v-if="list.isDone" class="btn btn-sm undoButton float-right" @click="toggleDone(list)">
+              <i class="fas fa-undo" aria-hidden="true"><strong> Undo</strong></i> 
+            </button>
 
-        <ul class="list-group">
-            <li class="shadow bg-dark mb-4 list-group-item animate__animated animate__fadeInDown" v-for="list, remove in lists">
+            <button v-else class="btn btn-sm doneButton float-right" @click="toggleDone(list)">
+              <i class="far fa-check-circle" aria-hidden="true"><strong> Mark as done</strong></i> 
+            </button>
 
-              <span v-if="list.isDone" class="strikeDark">{{list.text}}</span>
-              <span v-else>{{list.text}}</span>
-
-              <button class="close cDark float-right" aria-label="Close" @click="removeList(remove)">
-                <span aria-hidden="true">&times;</span>
-              </button>
-
-              <button v-if="list.isDone" class="btn btn-sm undoButton float-right" @click="toggleDone(list)">
-                <i class="fas fa-undo" aria-hidden="true"><strong> Undo</strong></i> 
-              </button>
-
-              <button v-else class="btn btn-sm doneButton float-right" @click="toggleDone(list)">
-                <i class="far fa-check-circle" aria-hidden="true"><strong> Mark as done</strong></i> 
-              </button>
-
-            </li>
-
+          </li>
         </ul>
+
       </div>
     </div>
   `,
@@ -102,7 +56,13 @@ Vue.component("todolists", {
   data() {
     return {
       addTodo: "",
-      mode: false,
+      bgChange: "",
+      bodyTheme: "",
+      themeTxt: "",
+      strikeTheme: "strike",
+      darkModeText: 'Dark mode off',
+      cardTitle: 'List your todo for today!',
+      darkMode: false,
       lists: [
         { text: "Clean the room", isDone: false },
         { text: "Cook food", isDone: false },
@@ -115,27 +75,44 @@ Vue.component("todolists", {
     addList() {
       inputLen = this.addTodo.trim().length;
       if (inputLen == 0) {
-        alert('Cannot be empty, please enter a valid todo/task!');
+        alert('Cannot be empty, please enter a valid todo/task!')
       }
       else {
-        this.lists.push({ text: this.addTodo, isDone: false });
+        this.lists.push({ text: this.addTodo, isDone: false })
       }
-      this.addTodo = "";
+      this.addTodo = ""
+    },
+ 
+    spaceBarValidate() {
+      inputLen = this.addTodo.trim().length;
+      if(inputLen == 0) {
+        alert('Your input is empty, make sure to add a valid todo/task!')
+      }
     },
 
     removeList(remove) {
-      this.$delete(this.lists, remove);
+      this.$delete(this.lists, remove)
     },
 
     toggleDone(list) {
-      list.isDone = !list.isDone;
+      list.isDone = !list.isDone
     },
 
     toggleDark() {
-      if (this.mode === true) {
-        this.mode = false;
+      if (this.darkMode === true) {
+        this.darkModeText = 'Dark mode off'
+        this.cardTitle = 'List your todo for today!'
+        this.strikeTheme = 'strike'
+        this.bgChange = ''
+        this.bodyTheme = ''
+        this.darkMode = false
       } else {
-        this.mode = true;
+        this.darkModeText = 'Dark mode on'
+        this.bgChange = 'bg-dark text-white'
+        this.cardTitle = 'List your todo for tonight!'
+        this.strikeTheme = 'strikeDark'
+        this.bodyTheme = 'dark'
+        this.darkMode = true
       }
     },
   },
