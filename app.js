@@ -58,7 +58,6 @@ Vue.component("todolists", {
       addTodo: "",
       bgChange: "",
       bodyTheme: "",
-      themeTxt: "",
       strikeTheme: "strike",
       darkModeText: 'Dark mode off',
       cardTitle: 'List your todo for today!',
