@@ -2,7 +2,7 @@ Vue.component("todolists", {
   template: `
     <div :class="bodyTheme">
       <div>
-        <nav class="navbar navbar-expand navbar-lg" :class="bgChange">
+        <nav class="navbar navbar-expand navbar-lg fixed-top" :class="bgChange">
           <h4>{{darkModeText}}</h4>
           <label class="switch">
             <input type="checkbox" @click="toggleDark">
@@ -10,7 +10,7 @@ Vue.component("todolists", {
           </label>
         </nav>
       </div>
-
+      <br><br><br>
       <div class="container-fluid col-lg-6">
         <div class="card text-center shadow my-5" :class="bgChange">
 
@@ -29,7 +29,7 @@ Vue.component("todolists", {
         </div>
 
         <ul class="list-group">
-          <li :class="bgChange" class="shadow mb-4 list-group-item animate__animated animate__fadeInDown" v-for="list, remove in lists">
+          <li :class="bgChange" class="shadow mb-4 list-group-item" v-for="list, remove in lists">
 
             <span v-if="list.isDone" :class="strikeTheme">{{list.text}}</span>
             <span v-else>{{list.text}}</span>
@@ -56,7 +56,7 @@ Vue.component("todolists", {
   data() {
     return {
       addTodo: "",
-      bgChange: "",
+      bgChange: "bg-white text-dark",
       bodyTheme: "",
       strikeTheme: "strike",
       darkModeText: 'Dark mode off',
@@ -77,7 +77,7 @@ Vue.component("todolists", {
         alert('Cannot be empty, please enter a valid todo/task!')
       }
       else {
-        this.lists.push({ text: this.addTodo, isDone: false })
+        this.lists.unshift({ text: this.addTodo, isDone: false })
       }
       this.addTodo = ""
     },
@@ -102,7 +102,7 @@ Vue.component("todolists", {
         this.darkModeText = 'Dark mode off'
         this.cardTitle = 'List your todo for today!'
         this.strikeTheme = 'strike'
-        this.bgChange = ''
+        this.bgChange = 'bg-white text-dark'
         this.bodyTheme = ''
         this.darkMode = false
       } else {
