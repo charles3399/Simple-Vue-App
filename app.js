@@ -2,12 +2,21 @@ Vue.component("todolists", {
   template: `
     <div :class="bodyTheme">
       <div>
-        <nav class="navbar navbar-expand navbar-lg fixed-top" :class="bgChange">
-          <h4>{{darkModeText}}</h4>
-          <label class="switch">
+        <nav class="navbar navbar-expand navbar-lg fixed-top d-flex justify-content-between" :class="bgChange">
+          <div class="navbar-nav">
+            <label class="switch">
             <input type="checkbox" @click="toggleDark">
             <span class="slider"></span>
-          </label>
+            </label>
+            <h3>{{darkModeText}}</h3>
+          </div>
+          
+          <div class="mr-2">
+            <h3>
+              <a name="" id="" :class="bgChange" href="https://github.com/charles3399/Simple-Vue-App" target="_blank" rel="noopener noreferrer" role="button"><i class="fab fa-github-square"></i></a>
+            </h3>
+          </div>
+
         </nav>
       </div>
       <br><br><br>
@@ -58,7 +67,7 @@ Vue.component("todolists", {
       addTodo: "",
       bgChange: "bg-white text-dark",
       bodyTheme: "",
-      darkModeText: 'Dark mode off',
+      darkModeText: 'Good day!',
       cardTitle: 'List your todo for today!',
       darkMode: false,
       lists: [
@@ -86,6 +95,7 @@ Vue.component("todolists", {
       if(inputLen == 0) {
         alert('Your input is empty, make sure to add a valid todo/task!')
       }
+      this.addTodo = ""
     },
 
     removeList(remove) {
@@ -98,13 +108,13 @@ Vue.component("todolists", {
 
     toggleDark() {
       if (this.darkMode === true) {
-        this.darkModeText = 'Dark mode off'
+        this.darkModeText = 'Good day!'
         this.cardTitle = 'List your todo for today!'
         this.bgChange = 'bg-white text-dark'
         this.bodyTheme = ''
         this.darkMode = false
       } else {
-        this.darkModeText = 'Dark mode on'
+        this.darkModeText = 'Good night!'
         this.bgChange = 'bg-dark text-white'
         this.cardTitle = 'List your todo for tonight!'
         this.bodyTheme = 'dark'

@@ -45,7 +45,7 @@ button.close.cDark {
     display: inline-block;
     width: 60px;
     height: 34px;
-    margin-left: 10px;
+    margin-right: 5px;
 }
 
 .switch input { 
@@ -114,9 +114,3 @@ li.bg-dark, .bg-dark {
     min-height: 100vh;
 }
 
-@media (max-width: 900px) {
-    nav.navbar {
-        display: flex;
-        justify-content: center;
-    }
-}
