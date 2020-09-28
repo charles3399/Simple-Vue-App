@@ -31,7 +31,7 @@ Vue.component("todolists", {
         <ul class="list-group">
           <li :class="bgChange" class="shadow mb-4 list-group-item" v-for="list, remove in lists">
 
-            <span v-if="list.isDone" :class="strikeTheme">{{list.text}}</span>
+            <span v-if="list.isDone"><s>{{list.text}}</s></span>
             <span v-else>{{list.text}}</span>
 
             <button class="close float-right" aria-label="Close" @click="removeList(remove)">
@@ -58,7 +58,6 @@ Vue.component("todolists", {
       addTodo: "",
       bgChange: "bg-white text-dark",
       bodyTheme: "",
-      strikeTheme: "strike",
       darkModeText: 'Dark mode off',
       cardTitle: 'List your todo for today!',
       darkMode: false,
@@ -101,7 +100,6 @@ Vue.component("todolists", {
       if (this.darkMode === true) {
         this.darkModeText = 'Dark mode off'
         this.cardTitle = 'List your todo for today!'
-        this.strikeTheme = 'strike'
         this.bgChange = 'bg-white text-dark'
         this.bodyTheme = ''
         this.darkMode = false
@@ -109,7 +107,6 @@ Vue.component("todolists", {
         this.darkModeText = 'Dark mode on'
         this.bgChange = 'bg-dark text-white'
         this.cardTitle = 'List your todo for tonight!'
-        this.strikeTheme = 'strikeDark'
         this.bodyTheme = 'dark'
         this.darkMode = true
       }

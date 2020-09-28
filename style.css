@@ -9,53 +9,9 @@ strong {
     color:white;
 }
 
-@keyframes strike{
-    0% {width: 0;}
-    100% {width: 100;}
-}
-
-@keyframes strikeDark{
-    0% {width: 0;}
-    100% {width: 100;}
-}
-
 button.close.cDark {
     color: #ffff;
     opacity: 1;
-}
-
-.strike, .strikeDark{
-    position: relative;
-}
-
-.strike::after{
-    content: ' ';
-    position: absolute;
-    top: 50%;
-    left: 0;
-    width: 100%;
-    height: 1px;
-    background: black;
-    animation-name: strike;
-    animation-duration: 0.2s;
-    animation-timing-function: linear;
-    animation-iteration-count: 1;
-    animation-fill-mode: forwards;
-}
-
-.strikeDark::after{
-    content: ' ';
-    position: absolute;
-    top: 50%;
-    left: 0;
-    width: 100%;
-    height: 1px;
-    background: white;
-    animation-name: strike;
-    animation-duration: 0.2s;
-    animation-timing-function: linear;
-    animation-iteration-count: 1;
-    animation-fill-mode: forwards;
 }
 
 .doneButton {
