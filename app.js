@@ -13,7 +13,7 @@ Vue.component("todolists", {
           
           <div class="mr-2">
             <h3>
-              <a name="" id="" :class="bgChange" href="https://github.com/charles3399/Simple-Vue-App" target="_blank" rel="noopener noreferrer" role="button"><i class="fab fa-github-square"></i></a>
+              <a :class="bgChange" href="https://github.com/charles3399/Simple-Vue-App" target="_blank" rel="noopener noreferrer" role="button"><i class="fab fa-github-square"></i></a>
             </h3>
           </div>
 
@@ -85,7 +85,7 @@ Vue.component("todolists", {
         alert('Cannot be empty, please enter a valid todo/task!')
       }
       else {
-        this.lists.unshift({ text: this.addTodo, isDone: false })
+        this.lists.push({ text: this.addTodo, isDone: false })
       }
       this.addTodo = ""
     },
