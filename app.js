@@ -59,6 +59,13 @@ Vue.component("todolists", {
         </ul>
 
       </div>
+
+      <footer class="page-footer" :class="bgChange">
+        <div class="footer-copyright text-center py-3">
+          <span>&copy; {{getYear}} Copyright Todo App, made with <i class="far fa-heart"></i> by Charles</span>
+        </div>
+      </footer>
+
     </div>
   `,
 
@@ -70,6 +77,7 @@ Vue.component("todolists", {
       darkModeText: 'Good day!',
       cardTitle: 'List your todo for today!',
       darkMode: false,
+      getYear: new Date().getFullYear(),
       lists: [
         { text: "Clean the room", isDone: false },
         { text: "Cook food", isDone: false },
