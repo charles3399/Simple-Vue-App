@@ -60,7 +60,7 @@ Vue.component("todolists", {
 
       </div>
 
-      <footer class="page-footer" :class="bgChange">
+      <footer class="footer text-muted">
         <div class="footer-copyright text-center py-3">
           <span>&copy; {{getYear}} Copyright Todo App, made with <i class="far fa-heart"></i> by Charles</span>
         </div>
