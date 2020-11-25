@@ -136,7 +136,7 @@ Vue.component("todolists", {
   },
 
   computed: {
-    //Disables the input bar if there is no character to prevent adding a todo with an empty text
+    //Disables the add button if there is no character to prevent adding a todo with an empty text
     isDisabled() {
       return this.addTodo.length === 0;
     },
