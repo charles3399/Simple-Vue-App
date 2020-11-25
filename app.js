@@ -84,9 +84,9 @@ Vue.component("todolists", {
         { text: "Sleep", isDone: true },
       ],
     };
-  },
-
+  }, 
   methods: {
+    //Adds/push a todo
     addList() {
       inputLen = this.addTodo.trim().length;
       if (inputLen == 0) {
@@ -98,7 +98,8 @@ Vue.component("todolists", {
       this.addTodo = ""
     },
  
-    spaceBarValidate() {
+    //Validates input by detecting if the first character is a spacebar, it will have an alert
+    spaceBarValidate() { 
       inputLen = this.addTodo.trim().length;
       if(inputLen == 0) {
         alert('Your input is empty, make sure to add a valid todo/task!')
@@ -106,14 +107,17 @@ Vue.component("todolists", {
       }
     },
 
+    //Deletes a todo
     removeList(remove) {
       this.$delete(this.lists, remove)
     },
 
-    toggleDone(list) {
+    //If a todo is done, it will strike through the whole text
+    toggleDone(list) { 
       list.isDone = !list.isDone
     },
 
+    //Toggles dark mode and light mode
     toggleDark() {
       if (this.darkMode === true) {
         this.darkModeText = 'Good day!'
@@ -132,6 +136,7 @@ Vue.component("todolists", {
   },
 
   computed: {
+    //Disables the input bar if there is no character to prevent adding a todo with an empty text
     isDisabled() {
       return this.addTodo.length === 0;
     },
