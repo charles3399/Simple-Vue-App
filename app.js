@@ -4,11 +4,9 @@ Vue.component("todolists", {
       <div>
         <nav class="navbar navbar-expand navbar-lg fixed-top d-flex justify-content-between" :class="bgChange">
           <div class="navbar-nav">
-            <label class="switch">
-            <input type="checkbox" @click="toggleDark">
-            <span class="slider"></span>
-            </label>
-            <h3>{{darkModeText}}</h3>
+            <h3>
+              <i :class="iconMode" @click="toggleDark" id="iconMode"></i>
+            </h3>
           </div>
           
           <div class="mr-2">
@@ -24,7 +22,7 @@ Vue.component("todolists", {
         <div class="card text-center shadow my-5" :class="bgChange">
 
           <div class="card-header">
-            <h4>{{cardTitle}}</h4>
+            <h4>To-do list</h4>
           </div>
 
           <div class="card-body">
@@ -74,8 +72,7 @@ Vue.component("todolists", {
       addTodo: "",
       bgChange: "bg-white text-dark",
       bodyTheme: "",
-      darkModeText: 'Good day!',
-      cardTitle: 'List your todo for today!',
+      iconMode: 'fas fa-sun',
       darkMode: false,
       getYear: new Date().getFullYear(),
       lists: [
@@ -120,15 +117,13 @@ Vue.component("todolists", {
     //Toggles dark mode and light mode
     toggleDark() {
       if (this.darkMode === true) {
-        this.darkModeText = 'Good day!'
-        this.cardTitle = 'List your todo for today!'
+        this.iconMode = 'fas fa-sun'
         this.bgChange = 'bg-white text-dark'
         this.bodyTheme = ''
         this.darkMode = false
       } else {
-        this.darkModeText = 'Good evening!'
+        this.iconMode = 'far fa-moon'
         this.bgChange = 'bg-dark text-white'
-        this.cardTitle = 'List your todo for tonight!'
         this.bodyTheme = 'dark'
         this.darkMode = true
       }
