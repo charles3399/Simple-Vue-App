@@ -26,7 +26,7 @@ Vue.component("todolists", {
           </div>
 
           <div class="card-body">
-            <input class="form-control" type='text' v-model="addTodo" v-on:keyup.enter="addList" v-on:keyup.space="spaceBarValidate">
+            <input class="form-control" type='text' v-model="addTodo" v-on:keyup.enter="addList">
 
             <button class="btn btn-success btn-lg my-2" @click='addList' :disabled="isDisabled">
               <i class="fa fa-plus-circle" aria-hidden="true"><strong> Add</strong></i>
@@ -83,7 +83,7 @@ Vue.component("todolists", {
     };
   }, 
   methods: {
-    //Adds/push a todo
+    // Validates input and adds/push a todo
     addList() {
       inputLen = this.addTodo.trim().length;
       if (inputLen == 0) {
@@ -93,15 +93,6 @@ Vue.component("todolists", {
         this.lists.push({ text: this.addTodo, isDone: false })
       }
       this.addTodo = ""
-    },
- 
-    //Validates input by detecting if the first character is a spacebar, it will have an alert
-    spaceBarValidate() { 
-      inputLen = this.addTodo.trim().length;
-      if(inputLen == 0) {
-        alert('Your input is empty, make sure to add a valid todo/task!')
-        this.addTodo = ""
-      }
     },
 
     //Deletes a todo
@@ -138,7 +129,7 @@ Vue.component("todolists", {
   },
 });
 
-Vue.config.devtools = false //disable when debugging
+Vue.config.devtools = false //set to true when debugging, false for production
 
 new Vue({
   el: '#app'
