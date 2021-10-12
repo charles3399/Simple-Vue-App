@@ -126,7 +126,7 @@ Vue.component("todolists", {
         this.bodyTheme = ''
         this.darkMode = false
       } else {
-        this.darkModeText = 'Good night!'
+        this.darkModeText = 'Good evening!'
         this.bgChange = 'bg-dark text-white'
         this.cardTitle = 'List your todo for tonight!'
         this.bodyTheme = 'dark'
