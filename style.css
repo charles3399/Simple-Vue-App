@@ -45,5 +45,6 @@ s {
 .dark {
     background-color: #1B2431;
     color: #fff;
+    min-height: 100vh;
 }
 
