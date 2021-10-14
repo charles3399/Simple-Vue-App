@@ -41,16 +41,16 @@ Vue.component("todolists", {
             <span v-if="list.isDone"><s>{{list.text}}</s></span>
             <span v-else>{{list.text}}</span>
 
-            <button class="close float-right" aria-label="Close" @click="removeList(remove)">
+            <button :class="textColor" class="close float-right" aria-label="Close" @click="removeList(remove)">
               <span aria-hidden="true">&times;</span>
             </button>
 
-            <button v-if="list.isDone" class="btn btn-sm undoButton float-right" @click="toggleDone(list)">
-              <i class="fas fa-undo" aria-hidden="true"><strong> Undo</strong></i> 
+            <button v-if="list.isDone" class="btn btn-sm float-right" id="undoButton" @click="toggleDone(list)">
+              <i :class="textColor" class="fas fa-undo" aria-hidden="true"><span :class="textColor"> Undo</span></i> 
             </button>
 
-            <button v-else class="btn btn-sm doneButton float-right" @click="toggleDone(list)">
-              <i class="far fa-check-circle" aria-hidden="true"><strong> Mark as done</strong></i> 
+            <button v-else class="btn btn-sm float-right" id="doneButton" @click="toggleDone(list)">
+              <i :class="textColor" class="fas fa-check" aria-hidden="true"><span :class="textColor"> Mark as done</span></i> 
             </button>
 
           </li>
@@ -60,7 +60,7 @@ Vue.component("todolists", {
 
       <footer class="footer text-muted">
         <div class="footer-copyright text-center py-3">
-          <span>&copy; {{getYear}} Copyright Todo App, made with <i class="far fa-heart"></i> by Charles</span>
+          <span :class="textColor">&copy; {{getYear}} Copyright Todo App, made with <i class="far fa-heart"></i> by Charles</span>
         </div>
       </footer>
 
@@ -71,6 +71,7 @@ Vue.component("todolists", {
     return {
       addTodo: "",
       bgChange: "bg-white text-dark",
+      textColor: "text-dark",
       bodyTheme: "",
       iconMode: 'fas fa-sun',
       darkMode: false,
@@ -90,7 +91,7 @@ Vue.component("todolists", {
         alert('Cannot be empty, please enter a valid todo/task!')
       }
       else {
-        this.lists.push({ text: this.addTodo, isDone: false })
+        this.lists.unshift({ text: this.addTodo, isDone: false })
       }
       this.addTodo = ""
     },
@@ -110,11 +111,13 @@ Vue.component("todolists", {
       if (this.darkMode === true) {
         this.iconMode = 'fas fa-sun'
         this.bgChange = 'bg-white text-dark'
+        this.textColor= "text-dark"
         this.bodyTheme = ''
         this.darkMode = false
       } else {
         this.iconMode = 'far fa-moon'
         this.bgChange = 'bg-dark text-white'
+        this.textColor= "text-white"
         this.bodyTheme = 'dark'
         this.darkMode = true
       }

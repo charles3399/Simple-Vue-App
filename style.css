@@ -3,11 +3,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Montserrat';
-    transition: background 0.3s ease-in-out;
-}
-
-strong {
-    color:white;
+    transition: background .3s ease-in-out;
 }
 
 nav h3 {
@@ -20,47 +16,34 @@ nav h3 i:hover {
     cursor: pointer;
 }
 
-button.close.cDark {
-    color: #ffff;
-    opacity: 1;
+s {
+    text-decoration-thickness: 2px;
 }
 
-.doneButton {
-    background-image: linear-gradient(to right, #00c6ff 0%, #0072ff 51%, #00c6ff 100%);
+#doneButton {
+    border: 2px solid rgb(2, 231, 2);
+}
+
+#undoButton {
+    border: 2px solid rgb(238, 241, 10);
+}
+
+#doneButton,
+#undoButton {
     flex: 1 1 auto;
-    text-transform: uppercase;
     margin-right: 20px;
     text-align: center;
-    background-size: 200% auto;
     border-radius: 10px;
 }
 
-.undoButton {
-    background-image: linear-gradient(to right, #F7971E 0%, #FFD200 51%, #F7971E 100%);
-    flex: 1 1 auto;
-    text-transform: uppercase;
-    margin-right: 20px;
-    text-align: center;
-    background-size: 200% auto;
-    border-radius: 10px;
-}
-
-.doneButton:hover,
-.undoButton:hover { 
+#doneButton:hover,
+#undoButton:hover { 
     background-position: right center;
-    transition: 0.5s;
-}
-
-.app {
-    background-color: #F3F3F3;
-    color: #15202B;
-    width: 100vw;
-    min-height: 100vh;
+    box-shadow: -6px 3px 8px 0px #686868;
 }
 
 .dark {
     background-color: #1B2431;
-    color: whitesmoke;
-    min-height: 100vh;
+    color: #fff;
 }
 
