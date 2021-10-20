@@ -44,7 +44,7 @@ Vue.component("todolists", {
 
             <span v-if="list.isDone"><s>{{list.text}}</s></span>
             <span v-else @click="list.edit = true" v-show="!list.edit">{{list.text}}</span>
-            <input type='text' v-show="list.edit == true" v-model="list.text" @blur="list.edit = false; $emit('update')" @keyup.enter = "list.edit = false; $emit(update)">
+            <input type='text' v-show="list.edit == true" v-model="list.text" @blur="list.edit = false; $emit('update')" @keyup.enter = "list.edit = false; $emit('update')">
 
             <button :class="textColor" class="close float-right" aria-label="Close" @click="removeList(remove)">
               <span aria-hidden="true">&times;</span>
@@ -81,7 +81,6 @@ Vue.component("todolists", {
       iconMode: 'fas fa-sun',
       darkMode: false,
       getYear: new Date().getFullYear(),
-      editField: null,
       lists: [
         { text: "Clean the room", isDone: false, edit: false },
         { text: "Cook food", isDone: false, edit: false  },
@@ -97,14 +96,9 @@ Vue.component("todolists", {
         alert('Cannot be empty, please enter a valid todo/task!')
       }
       else {
-        this.lists.unshift({ text: this.addTodo, isDone: false })
+        this.lists.unshift({ text: this.addTodo, isDone: false, edit:false })
       }
       this.addTodo = ""
-    },
-
-    // Edit the list
-    editList: function(list){
-      this.editField = list
     },
 
     //Deletes a todo
