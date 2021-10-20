@@ -26,7 +26,7 @@ Vue.component("todolists", {
           </div>
 
           <div class="card-body">
-            <input class="form-control" type='text' v-model="addTodo" v-on:keyup.enter="addList">
+            <input class="form-control" type='text' v-model="addTodo" @keyup.enter="addList">
 
             <button class="btn btn-success btn-lg my-2" @click='addList' :disabled="isDisabled">
               <i class="fa fa-plus-circle" aria-hidden="true"><strong> Add</strong></i>
@@ -38,8 +38,13 @@ Vue.component("todolists", {
         <ul class="list-group">
           <li :class="bgChange" class="shadow mb-4 list-group-item" v-for="list, remove in lists">
 
+            <i v-show="!list.isDone" class="fas fa-question-circle" id="tooltip">
+              <div id="tooltiptext">Click the text to edit</div>
+            </i>
+
             <span v-if="list.isDone"><s>{{list.text}}</s></span>
-            <span v-else>{{list.text}}</span>
+            <span v-else @click="list.edit = true" v-show="!list.edit">{{list.text}}</span>
+            <input type='text' v-show="list.edit == true" v-model="list.text" @blur="list.edit = false; $emit('update')" @keyup.enter = "list.edit = false; $emit(update)">
 
             <button :class="textColor" class="close float-right" aria-label="Close" @click="removeList(remove)">
               <span aria-hidden="true">&times;</span>
@@ -76,10 +81,11 @@ Vue.component("todolists", {
       iconMode: 'fas fa-sun',
       darkMode: false,
       getYear: new Date().getFullYear(),
+      editField: null,
       lists: [
-        { text: "Clean the room", isDone: false },
-        { text: "Cook food", isDone: false },
-        { text: "Sleep", isDone: true },
+        { text: "Clean the room", isDone: false, edit: false },
+        { text: "Cook food", isDone: false, edit: false  },
+        { text: "Sleep", isDone: true , edit: false },
       ],
     };
   }, 
@@ -94,6 +100,11 @@ Vue.component("todolists", {
         this.lists.unshift({ text: this.addTodo, isDone: false })
       }
       this.addTodo = ""
+    },
+
+    // Edit the list
+    editList: function(list){
+      this.editField = list
     },
 
     //Deletes a todo

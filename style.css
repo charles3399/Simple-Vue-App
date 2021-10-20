@@ -20,6 +20,41 @@ s {
     text-decoration-thickness: 2px;
 }
 
+#tooltip {
+    position: relative;
+}
+
+#tooltiptext {
+    visibility: hidden;
+    position: absolute;
+    background: #868f9e;
+    color: #fff;
+    width: 177px;
+    text-align: center;
+    border-radius: 6px;
+    z-index: 1;
+    right: 28px;
+    padding: 3px;
+    bottom: -4px;
+    margin: -1px -5px 0 0;
+}
+
+#tooltiptext:after {
+    content: '';
+    position: absolute;
+    left: 99%;
+    bottom: 15%;
+    margin-left: -2px;
+    border-width: 8px;
+    border-style: solid;
+    border-color: transparent transparent transparent #868f9e;
+}
+
+#tooltip:hover #tooltiptext {
+    visibility: visible;
+    transition: all .3s ease-in-out;
+}
+
 #doneButton {
     border: 2px solid rgb(2, 231, 2);
 }
