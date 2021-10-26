@@ -52,7 +52,6 @@ s {
 
 #tooltip:hover #tooltiptext {
     visibility: visible;
-    transition: all .3s ease-in-out;
 }
 
 #doneButton {
