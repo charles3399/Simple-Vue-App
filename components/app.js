@@ -1,5 +1,6 @@
 Vue.component("todolists", {
-  template: `
+  template:/*html*/
+  `
     <div :class="bodyTheme">
       <div>
         <nav class="navbar navbar-expand navbar-lg fixed-top d-flex justify-content-between" :class="bgChange">
