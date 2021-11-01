@@ -33,7 +33,7 @@ s {
     text-align: center;
     border-radius: 6px;
     z-index: 1;
-    right: 28px;
+    left: 28px;
     padding: 3px;
     bottom: -4px;
     margin: -1px -5px 0 0;
@@ -42,12 +42,12 @@ s {
 #tooltiptext:after {
     content: '';
     position: absolute;
-    left: 99%;
+    right: 99%;
     bottom: 15%;
     margin-left: -2px;
     border-width: 8px;
     border-style: solid;
-    border-color: transparent transparent transparent #868f9e;
+    border-color: transparent #868f9e transparent transparent;
 }
 
 #tooltip:hover #tooltiptext {

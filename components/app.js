@@ -38,13 +38,11 @@ Vue.component("todolists", {
 
         <ul class="list-group">
           <li :class="bgChange" class="shadow mb-4 list-group-item" v-for="list, remove in lists">
-
+            <span v-if="list.isDone"><s>{{list.text}}</s></span>
+            <span v-else @click="list.edit = true" v-show="!list.edit">{{list.text}}</span>
             <i v-show="!list.isDone" class="fas fa-question-circle" id="tooltip">
               <div id="tooltiptext">Click the text to edit</div>
             </i>
-
-            <span v-if="list.isDone"><s>{{list.text}}</s></span>
-            <span v-else @click="list.edit = true" v-show="!list.edit">{{list.text}}</span>
             <input type='text' v-show="list.edit == true" v-model="list.text" @blur="list.edit = false; $emit('update')" @keyup.enter = "list.edit = false; $emit('update')">
 
             <button :class="textColor" class="close float-right" aria-label="Close" @click="removeList(remove)">
