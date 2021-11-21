@@ -37,25 +37,25 @@ Vue.component("todolists", {
         </div>
 
         <ul class="list-group">
-          <li :class="bgChange" class="shadow mb-4 list-group-item" v-for="list, remove in lists">
-            <span v-if="list.isDone"><s>{{list.text}}</s></span>
-            <span v-else @click="list.edit = true" v-show="!list.edit">{{list.text}}</span>
-            <input type='text' v-show="list.edit == true" v-model="list.text" @blur="list.edit = false; $emit('update')" @keyup.enter = "list.edit = false; $emit('update')">
-            <i v-show="!list.isDone" class="fas fa-question-circle" id="tooltip">
-              <div id="tooltiptext">Click the text to edit</div>
-            </i>
+          <li :class="bgChange" class="shadow mb-4 list-group-item d-flex justify-content-between" v-for="list, remove in lists">
+            <div>
+              <span v-if="list.isDone"><s>{{list.text}}</s></span>
+              <span v-else @click="list.edit = true" v-show="!list.edit">{{list.text}}</span>
+              <input type='text' v-show="list.edit == true" v-model="list.text" @blur="list.edit = false; $emit('update')" @keyup.enter = "list.edit = false; $emit('update')">
+              <i v-show="!list.isDone" class="fas fa-question-circle" id="tooltip">
+                <div id="tooltiptext" :class="toolTip">Click the text to edit</div>
+              </i>
+            </div>
+            <div>
+              <button v-if="list.isDone" class="btn btn-sm float-right" id="undoButton" @click="toggleDone(list)">
+                <i :class="textColor" class="fas fa-undo" aria-hidden="true"><span :class="textColor"> Undo</span></i> 
+              </button>
+              <button v-else class="btn btn-sm float-right" id="doneButton" @click="toggleDone(list)">
+                <i :class="textColor" class="fas fa-check" aria-hidden="true"><span :class="textColor"> Mark as done</span></i> 
+              </button>
 
-            <button :class="textColor" class="close float-right" aria-label="Close" @click="removeList(remove)">
-              <span aria-hidden="true">&times;</span>
-            </button>
-
-            <button v-if="list.isDone" class="btn btn-sm float-right" id="undoButton" @click="toggleDone(list)">
-              <i :class="textColor" class="fas fa-undo" aria-hidden="true"><span :class="textColor"> Undo</span></i> 
-            </button>
-
-            <button v-else class="btn btn-sm float-right" id="doneButton" @click="toggleDone(list)">
-              <i :class="textColor" class="fas fa-check" aria-hidden="true"><span :class="textColor"> Mark as done</span></i> 
-            </button>
+              <button :class="deleteTodoButton" class="btn-close" aria-label="Close" @click="removeList(remove)"></button>
+            </div>
 
           </li>
         </ul>
@@ -76,6 +76,8 @@ Vue.component("todolists", {
       addTodo: "",
       bgChange: "bg-white text-dark",
       textColor: "text-dark",
+      toolTip: 'bg-dark text-white',
+      deleteTodoButton: '',
       bodyTheme: "",
       iconMode: 'fas fa-sun',
       darkMode: false,
@@ -96,12 +98,16 @@ Vue.component("todolists", {
         this.iconMode = 'far fa-moon'
         this.bgChange = 'bg-dark text-white'
         this.textColor= "text-white"
+        this.deleteTodoButton = 'btn-close-white'
+        this.toolTip = 'bg-white text-dark'
         this.bodyTheme = 'dark'
       }
       else {
         this.iconMode = 'fas fa-sun'
         this.bgChange = 'bg-white text-dark'
         this.textColor= "text-dark"
+        this.deleteTodoButton = ''
+        this.toolTip = 'bg-dark text-white'
         this.bodyTheme = ''
       }
       this.darkMode = theme
@@ -152,16 +158,20 @@ Vue.component("todolists", {
 
     //Toggles dark mode and light mode
     toggleDark() {
-      if (this.darkMode === true) {
+      if (this.darkMode) {
         this.iconMode = 'fas fa-sun'
         this.bgChange = 'bg-white text-dark'
         this.textColor= "text-dark"
+        this.deleteTodoButton = ''
+        this.toolTip = 'bg-dark text-white'
         this.bodyTheme = ''
         this.darkMode = false
       } else {
         this.iconMode = 'far fa-moon'
         this.bgChange = 'bg-dark text-white'
         this.textColor= "text-white"
+        this.deleteTodoButton = 'btn-close-white'
+        this.toolTip = 'bg-white text-dark'
         this.bodyTheme = 'dark'
         this.darkMode = true
       }

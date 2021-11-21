@@ -27,27 +27,14 @@ s {
 #tooltiptext {
     visibility: hidden;
     position: absolute;
-    background: #868f9e;
-    color: #fff;
     width: 177px;
     text-align: center;
     border-radius: 6px;
     z-index: 1;
-    left: 28px;
+    left: 20px;
     padding: 3px;
     bottom: -4px;
     margin: -1px -5px 0 0;
-}
-
-#tooltiptext:after {
-    content: '';
-    position: absolute;
-    right: 99%;
-    bottom: 15%;
-    margin-left: -2px;
-    border-width: 8px;
-    border-style: solid;
-    border-color: transparent #868f9e transparent transparent;
 }
 
 #tooltip:hover #tooltiptext {
