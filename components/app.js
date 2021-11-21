@@ -87,6 +87,46 @@ Vue.component("todolists", {
       ],
     };
   }, 
+  mounted() {
+    //gets the saved theme and data from localstorage
+    if(localStorage.getItem('dark-mode')) {
+      let theme = JSON.parse(localStorage.getItem('dark-mode'))
+
+      if(theme) {
+        this.iconMode = 'far fa-moon'
+        this.bgChange = 'bg-dark text-white'
+        this.textColor= "text-white"
+        this.bodyTheme = 'dark'
+      }
+      else {
+        this.iconMode = 'fas fa-sun'
+        this.bgChange = 'bg-white text-dark'
+        this.textColor= "text-dark"
+        this.bodyTheme = ''
+      }
+      this.darkMode = theme
+    }
+
+    if(localStorage.getItem('todos')) {
+      let todos = JSON.parse(localStorage.getItem('todos'))
+      this.lists = todos
+    }
+  },
+  watch : {
+    // saves theme preference even when page is reloaded
+    darkMode: {
+      handler() {
+        localStorage.setItem('dark-mode', JSON.stringify(this.darkMode))
+      },
+      deep: true
+    },
+    lists: {
+      handler() {
+        localStorage.setItem('todos', JSON.stringify(this.lists))
+      },
+      deep: true
+    }
+  },
   methods: {
     // Validates input and adds/push a todo
     addList() {
