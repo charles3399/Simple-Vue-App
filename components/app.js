@@ -37,7 +37,7 @@ Vue.component("todolists", {
         </div>
 
         <ul class="list-group">
-          <li :class="bgChange" class="shadow mb-4 list-group-item d-flex justify-content-between" v-for="list, remove in lists">
+          <li :class="bgChange" id="lists" class="shadow mb-4 list-group-item d-flex justify-content-between" v-for="list, remove in lists">
             <div>
               <span v-if="list.isDone"><s>{{list.text}}</s></span>
               <span v-else @click="list.edit = true" v-show="!list.edit">{{list.text}}</span>

@@ -69,3 +69,32 @@ s {
     min-height: 100vh;
 }
 
+@media (max-width: 450px) {
+    #lists {
+        flex-direction: column;
+        text-align: center;
+        width: 90%;
+        margin: 0 auto;
+    }
+    #lists div:first-child {
+        margin: 0 0 10px 0;
+    }
+
+    #doneButton,
+    #undoButton {
+        margin-right: 0;
+        position: relative;
+    }
+
+    .card {
+        margin: 0 auto;
+        width: 90%;
+    }
+
+    .btn-close {
+        position: absolute;
+        right: 15px;
+        bottom: 30px;
+    }
+}
+
